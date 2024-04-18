@@ -14,9 +14,22 @@ class Node:
     def gini_best_score(self, y, possible_splits):
         best_gain = -np.inf
         best_idx = 0
-
         # TODO find position of best data split
+        for i in possible_splits:
+            left_pos = np.sum(y[:i + 1] == 1)
+            left_neg = np.sum(y[:i + 1] == 0)
+            right_pos = np.sum(y[i + 1:] == 1)
+            right_neg = np.sum(y[i + 1:] == 0)
 
+            gini_left = 1 - ((left_pos / (left_pos + left_neg))**2 + (left_neg / (left_pos + left_neg))**2)
+            gini_right = 1 - ((right_pos / (right_pos + right_neg))**2 + (right_neg / (right_pos + right_neg))**2)
+
+            gini_gain = 1 - ((left_pos + left_neg) / len(y)) * gini_left - ((right_pos + right_neg) / len(y)) * gini_right
+
+            if gini_gain > best_gain:
+                best_gain = gini_gain
+                best_idx = i
+        # for idx,value in enumerate(feature_subset):
         return best_idx, best_gain
 
     def split_data(self, X, y, idx, val):
@@ -33,8 +46,11 @@ class Node:
     def find_best_split(self, X, y, feature_subset):
         best_gain = -np.inf
         best_split = None
+       
 
-        # TODO implement feature selection
+        # TODO implement feature selection 
+        #losuje 2 cehcy 
+        #rvalue=rand
 
         for d in range(X.shape[1]):
             order = np.argsort(X[:, d])
