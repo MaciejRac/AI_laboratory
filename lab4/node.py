@@ -1,4 +1,5 @@
 import copy
+from math import sqrt
 
 import numpy as np
 
@@ -29,7 +30,6 @@ class Node:
             if gini_gain > best_gain:
                 best_gain = gini_gain
                 best_idx = i
-        # for idx,value in enumerate(feature_subset):
         return best_idx, best_gain
 
     def split_data(self, X, y, idx, val):
@@ -49,10 +49,11 @@ class Node:
        
 
         # TODO implement feature selection 
-        #losuje 2 cehcy 
-        #rvalue=rand
+        feature_subset = int(np.sqrt(X.shape[1]))
 
-        for d in range(X.shape[1]):
+        selected_features = np.random.choice(X.shape[1], feature_subset, replace=False)
+        #
+        for d in selected_features:
             order = np.argsort(X[:, d])
             y_sorted = y[order]
             possible_splits = self.find_possible_splits(X[order, d])
