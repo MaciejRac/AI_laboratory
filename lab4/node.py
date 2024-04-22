@@ -1,5 +1,4 @@
 import copy
-from math import sqrt
 
 import numpy as np
 
@@ -49,10 +48,11 @@ class Node:
        
 
         # TODO implement feature selection 
-        feature_subset = int(np.sqrt(X.shape[1]))
 
+        feature_subset=int(np.sqrt(X.shape[1]))+1
         selected_features = np.random.choice(X.shape[1], feature_subset, replace=False)
         #
+        #print(type(selected_features))
         for d in selected_features:
             order = np.argsort(X[:, d])
             y_sorted = y[order]
