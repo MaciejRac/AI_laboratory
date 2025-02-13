@@ -8,3 +8,8 @@ The repository contains artificial intelligence lab assignments and projects imp
 - NumPy
 - Pandas
 - Matplotlib
+
+## Creating virtual environment (venv) in Python (Windows)
+- python -m venv venv
+- venv\Scripts\Activate.ps1
+- pip install -r requirements.txt
